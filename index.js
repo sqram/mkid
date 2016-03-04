@@ -1,4 +1,4 @@
-module.exports = function mkid() {
+module.exports = function mkid(options) {
   options = options || {}
   const minLength = options.minLength || 1
   const maxLength = options.maxLength || 6
