@@ -1,5 +1,5 @@
-module.exports = function mkid(options = {}) {
-
+module.exports = function mkid() {
+  options = options || {}
   const minLength = options.minLength || 1
   const maxLength = options.maxLength || 6
   const alphabet = options.alphabet   || 'uvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!&~-+_'

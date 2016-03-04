@@ -1,5 +1,5 @@
 # mkid
-##### A custumizable Unique id generator
+##### A flexible unique id generator
 
 
  _like mkdir, but mkid!_
