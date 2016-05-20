@@ -2,25 +2,29 @@ module.exports = function mkid(options) {
   options = options || {}
   const minLength = options.minLength || 1
   const maxLength = options.maxLength || 6
-  const alphabet = options.alphabet   || 'uvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!&~-+_'
-  const forbiddenChars = options.forbiddenChars || []
-  const forbiddenFirstChars = options.forbiddenFirstChars+'' || ''
-
-  //var chars = '☉♩☹☀☍☮☿♎♡♥♬⚋⚉abcdefghijklmnopqrst'
-
+  const alphabet = options.alphabet   || 'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!&~-+_'
+  const cannotBe = options.cannotBe || []
+  const cannotStartWith = options.cannotStartWith+'' || ''
+  function shuffle(array) {
+      var n = array.length, t, i;
+      while (n) {
+        i = Math.random() * n-- | 0;
+        t = array[n];
+        array[n] = array[i];
+        array[i] = t;
+      }
+      return array.join('');
+    }
   var generateId = () => {
     var id;
 
-    // Sorta random... :)
-    var shuffled = alphabet.split('').sort( () => 0.5-Math.random()).join('')
+    // Shuffle & crop array to number between minLength & maxLength
+    id = shuffle(alphabet.split('')).slice(0, Math.floor(Math.random() * maxLength) + minLength);
 
-    // Crop array to number between minLength & maxLength
-    id = shuffled.slice(0, Math.floor(Math.random() * maxLength) + minLength)
-
-    if ((forbiddenFirstChars.indexOf(id.charAt(0)) != -1) || (forbiddenChars.indexOf(id) != -1)) {
+    if ((cannotStartWith.indexOf(id.charAt(0)) != -1) || (cannotBe.indexOf(id) != -1)) {
       generateId()
     } else {
-      return id
+      return id;
     }
   }
 
